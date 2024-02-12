@@ -1,0 +1,62 @@
+why Spring
+	Spring makes programming Java quicker, easier, and safer for everybody. Spring’s focus on speed, simplicity, and productivity has made it the world's most popular Java framework.
+
+Inversion of control:
+	In software engineering, inversion of control (IoC) is a design pattern in which custom-written portions of a computer program receive the flow of control from a generic framework.
+Dependency injector:
+	In software engineering, dependency injection is a programming technique in which an object or function receives other objects or functions that it requires, as opposed to creating them internally. Dependency injection aims to separate the concerns of constructing objects and using them, leading to loosely coupled programs
+Spring Boot transforms how you approach Java programming tasks, radically streamlining your experience. Spring Boot combines necessities such as an application context and an auto-configured, embedded web server to make microservice development a cinch.
+
+Spring Initializr is a web-based tool using which we can easily generate the structure of the Spring Boot project. It also provides various different features for the projects expressed in a metadata model. This model allows us to configure the list of dependencies that are supported by JVM.
+
+Spring Annotations are a form of metadata that provides data about a program. Annotations are used to provide supplemental information about a program. It does not have a direct effect on the operation of the code they annotate.
+RestController: RestController is used for making restful web services with the help of the @RestController annotation. This annotation is used at the class level and allows the class to handle the requests made by the client. 
+
+@PostMapping annotation in Spring MVC framework is a powerful tool for handling the HTTP POST requests in your RESTful web services. It maps specific URLs to handler methods allowing you to receive and process data submitted through POST requests. The @PostMapping annotation is a Spring annotation that is used to map HTTP POST requests onto specific handler methods.
+@GetMapping annotation in Spring is a powerful for building RESTful web services. It maps HTTP GET requests to a specific handler method in Spring controllers. With the help of @GetMapping annotation we can easily define endpoints of RESTful API and handle various HTTP requests. @GetMapping annotation is used for mapping HTTP GET requests onto specific handler methods.
+
+WHat is Maven
+	Maven is a project management tool.
+	Most popular use of Maven is for build management and dependencies.
+	Maven download jar files which is mention in dependency and make those jar file available during compile time/run.
+Standard Directory Structure
+	src/main/java:java source code
+	src/main/resource: property/config files used by your app
+	src/main/webapp: JSP files and web config files other web assets(image,css,js etc)
+	src/test: unit testing code and properties
+	target: destination directory for compiled code. Automatically created by Maven
+POM File
+	POM file:project object model file, basically shopping list for Maven
+	POM file contains:
+		project meta data: project name,version etc
+		dependencies: List of projects depends on Spring,Hibernate etc
+		plugins: Additional custom task to run: generate JUnit test reports etc.
+	project meta data : uniquely identifies a project
+		Group Id: name of your company,group or organization. Convention is to use in reverse domain name: com.suntec
+		Artifact Id: Name of the project
+		Version: A specific release version like: 1.0,1.6,2.0.
+			if project is under active development then: 1.0-SNAPSHOT 
+	GSV: abbrevation for Group id, artifact Id and Version
+Maven wrapper files: 
+	mvnw allows you to run a Maven project, download correct version of Maven
+Read data from application.properties
+	@Value("${<keyVariable>}")
+	private String variableName;
+Under src/main/resources/static contains static resources like HTML files,CSS,javaScript,image etc
+Under src/main/resources/templates contains templates
+
+WhaT is Spring Boot Starter
+	curated list of maven dependency
+	collections of dependency grouped together
+	tested and verified by spring development team
+	reduce the amount of maven configuration
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-web</artifactId>			//It contains collections of maven dependency (i.e. contains spring-web,spring-webmvc,hibernate-validator,json,tomcat etc)
+	</dependency>
+Spring MVC is a library that simplifies the handling http request and response.
+Spring MVC use dispatcher Servlet that act as a front controller for spring based web application.Any request is going to come into our website the front controller is going to stand in front and is going to accept all the requests and once the front controller accepts that request then this is the job of the front controller that it will make a decision that who is the right controller to handle that request.
+Spring Dev Tool: restart our app automatically.
+Spring boot Actuator: expose endpoints to monitor and manage your application. Just add dependency to POM file
+	( /actuator/health--> default one,/actuator/info)
+	in resource/application.properties file add management.endpoints.web.exposure.include=*			//expose all endpoints
