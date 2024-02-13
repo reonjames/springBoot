@@ -13,7 +13,7 @@ Spring Annotations are a form of metadata that provides data about a program. An
 RestController: RestController is used for making restful web services with the help of the @RestController annotation. This annotation is used at the class level and allows the class to handle the requests made by the client. 
 
 @PostMapping annotation in Spring MVC framework is a powerful tool for handling the HTTP POST requests in your RESTful web services. It maps specific URLs to handler methods allowing you to receive and process data submitted through POST requests. The @PostMapping annotation is a Spring annotation that is used to map HTTP POST requests onto specific handler methods.
-@GetMapping annotation in Spring is a powerful for building RESTful web services. It maps HTTP GET requests to a specific handler method in Spring controllers. With the help of @GetMapping annotation we can easily define endpoints of RESTful API and handle various HTTP requests. @GetMapping annotation is used for mapping HTTP GET requests onto specific handler methods.
+@GetMapping annotation in Spring is a powerful tool for building RESTful web services. It maps HTTP GET requests to a specific handler method in Spring controllers. With the help of @GetMapping annotation we can easily define endpoints of RESTful API and handle various HTTP requests. @GetMapping annotation is used for mapping HTTP GET requests onto specific handler methods.
 
 WHat is Maven
 	Maven is a project management tool.
@@ -60,3 +60,14 @@ Spring Dev Tool: restart our app automatically.
 Spring boot Actuator: expose endpoints to monitor and manage your application. Just add dependency to POM file
 	( /actuator/health--> default one,/actuator/info)
 	in resource/application.properties file add management.endpoints.web.exposure.include=*			//expose all endpoints
+To secure information of actuator add spring security to project and endpoints are secured
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-security</artifactId>
+	</dependency>
+	
+	To override default user name and generated password, update application.properties file
+		spring.security.user.name=admin
+		spring.security.user.password=admin			default one is user and password get it from console
+	To exclude /health,/info
+		management.endpoints.web.exposure.exclude=health,info
