@@ -1,3 +1,4 @@
+SECTION-1 QUICK START
 why Spring
 	Spring makes programming Java quicker, easier, and safer for everybody. Spring’s focus on speed, simplicity, and productivity has made it the world's most popular Java framework.
 
@@ -71,3 +72,39 @@ To secure information of actuator add spring security to project and endpoints a
 		spring.security.user.password=admin			default one is user and password get it from console
 	To exclude /health,/info
 		management.endpoints.web.exposure.exclude=health,info
+Keep in mind jar file contains application+server
+
+Two option for running the app from command line:
+	1.mvnw package							//to package the app and generate the jar file inside target folder
+	  java -jar <appName.jar>
+	2.mvnw spring-boot:run
+To read value from application.properties:
+	@Value("${coach.name}")
+	private String coachName;
+
+SECTION-2 SPRING CORE
+
+Inversion of Control: approach of outsourcing the construction and management of objects.
+Primary function of spring container:
+	1.create and manage objects (Inversion of Control)
+	2.Inject object's dependencies (Dependency Injection)
+Injection type:
+	1.Construction Injection
+		Use this when u have required dependencies
+		Recommended by spring.io development team
+	2.Setter Injection
+		Use this when u have optional dependencies
+		if dependency is not provided, ur app can provide reasonable default logic
+Spring AutoWiring
+	For dependency injection, Spring can use autowiring
+	Spring will look for a class that matches, matches by type:class or interface
+	Spring will inject it automatically...hence it is autowired.
+
+@Component annotation
+	@Component marks the class as spring bean.
+	A spring bean is just a regular java class that is managed by Spring.
+	@Component also makes the bean available for dependency injection
+@Autowired annotation tells Spring to inject a dependency, if u have one constructor then @Autowired on constructor is optional.
+@SpringBootApplication contains @AutoScanConfiguration, @Configuration, @__
+	This will scan from packages and its sub packages
+	If package is outside main package then list it in @SpringBootApplication(scanBasePackages={"com.luv2code.utils",....})
