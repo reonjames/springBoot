@@ -108,3 +108,20 @@ Spring AutoWiring
 @SpringBootApplication contains @AutoScanConfiguration, @Configuration, @__
 	This will scan from packages and its sub packages
 	If package is outside main package then list it in @SpringBootApplication(scanBasePackages={"com.luv2code.utils",....})
+Field injection is no longer in use			//use of @Autowired before field
+
+@Qualifier will specifically tells which class object it is looking for, if we have multiple class then to create object of specific class specify qualifier
+	e.g. @Autowired
+	     public DemoController(@Qualifier("cricketCoach") Coach theCoach) {				// same can be done for setter injection.Note here class name is in camelCase
+		myCoach = theCoach;
+		}
+Alter to above approach use @Primary in one of the multiple class then no need to use @Qualifier.
+If u mix @Qualifier and @Primary then @Qualifier has higher priority.
+
+Bean class will initialize during application run but if u want to not initialize then add @Lazy annotation before class name so it won't initialize until dependency injection (by calling REST endpoint)
+To make Lazy initialization available for all class, add spring.main.lazy-initialization=true in application.properties files
+
+Default scope of bean is singleton (V.imp)
+Spring container create one instance by default, cached in memory and all dependency injections for thr bean will refer the same bean.
+To explicity specify bean scope :
+	@Scope(configurableBeanFactory.SCOPE_SINGLETON)		// similary ...SCOPE_PROTOTYPE
