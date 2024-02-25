@@ -124,4 +124,30 @@ To make Lazy initialization available for all class, add spring.main.lazy-initia
 Default scope of bean is singleton (V.imp)
 Spring container create one instance by default, cached in memory and all dependency injections for thr bean will refer the same bean.
 To explicity specify bean scope :
-	@Scope(configurableBeanFactory.SCOPE_SINGLETON)		// similary ...SCOPE_PROTOTYPE
+	@Scope(configurableBeanFactory.SCOPE_SINGLETON)		// specify it at object class level, similary ...SCOPE_PROTOTYPE (new object instance creation for each injection)
+Bean Lifecycle
+	container started->bean initialized->dependency injected->internal spring processing->your custom Init method->bean is ready to use
+	container is shutdown->your custom destroy method->stop
+why bean lifecycle method
+	bean initialization (@PostConstruct)
+		calling custom business logic method
+		setting up handles to resources(db,sockets,file etc)
+	bean destruction (@P
+		calling custom business logic method
+		clean up handles to resources(db,sockets,file etc)
+Init: method configuration
+	@PostConstruct
+	public void doMyStartupStuff() {
+		System.out.println("In this method" +getClass().getSimpleName()); }
+@PreDestroy
+	public void doMyCleanupStuff() {
+	 System.out.println("In this method" +getClass().getSimpleName()); }
+Special note for Prototype beans
+	for prototype scoped beans,spring does not call destroy method
+	configured destruction lifecycles callbacks are not called, in case of prototype.
+	Prototype beans are lazy by default. There is no need to use @Lazy annotation.
+
+Configure bean with java code						//to make third party class as spring bean so that it can be available to spring framework
+	1.create @Configuration class
+	2.define @Bean method to configure the bean			//like return new class object and bean id is the method name
+	3.Inject the bean into our controller				//inject the bean using bean id
