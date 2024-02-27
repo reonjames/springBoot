@@ -151,3 +151,28 @@ Configure bean with java code						//to make third party class as spring bean so
 	1.create @Configuration class
 	2.define @Bean method to configure the bean			//like return new class object and bean id is the method name
 	3.Inject the bean into our controller				//inject the bean using bean id
+
+Hibernate:
+	A framework for persisting/saving java objects in a database
+	It handles all low level SQL
+	minimize the amount of JDBC code you have to develop
+	It provide Object to relational mapping(ORM)
+ORM: developer defines mapping between java class and database table.
+
+JPA: Jakarta Persistence API (JPA):
+	standard API for Object to Relational Mapping(ORM)
+	Only a Specification
+		define a set of interfaces
+		requires an impementation to be usable
+Hibernate implement JPA interfaces that is Hibernate provide the implementation of method define in JPA.
+
+//save it to database
+example: entityManager.persist(theStudent);		//here entityManager is a special JPA helper object.
+example: entityManager.find(Student.class, theId);	//query/retrieve the database for given id
+
+To query for java objects i.e a list
+	TypedQuery<Student> theQuery = entityManager.createQuery("from Student",Student.class);
+	List<Student> students=theQuery.getResultList();		//getResultList() return a list of Student objects from the database
+Relation b/w hibernate/JPA and JDBC
+	Hibernate/JPA uses JDBC for all database communications.
+MySQl has two components: MySQL Database server and MySQL Workbench
