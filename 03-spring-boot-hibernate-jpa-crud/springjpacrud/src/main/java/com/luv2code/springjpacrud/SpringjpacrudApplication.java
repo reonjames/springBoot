@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import com.luv2code.springjpacrud.dao.StudentDAO;
 import com.luv2code.springjpacrud.entity.Student;
 
+import java.util.List;
+
 import org.springframework.boot.CommandLineRunner;
 
 @SpringBootApplication
@@ -18,8 +20,11 @@ public class SpringjpacrudApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 		return runner->{
-			//createStudent(studentDAO);
-			readStudent(studentDAO);
+			createStudent(studentDAO);
+			//readStudent(studentDAO);
+			//queryForStudent(studentDAO);
+			//updateStudent(studentDAO);
+			//deleteStudent(studentDAO);
 		};
 	}
 	private void createStudent(StudentDAO studentDAO){
@@ -44,5 +49,27 @@ public class SpringjpacrudApplication {
 		Student retrieveStudent = studentDAO.findById(tempStudent.getId());
 		//display student
 		System.out.println("my student = "+retrieveStudent);
+	}
+
+	private void queryForStudent(StudentDAO studentDAO){
+		List<Student> queryStudent = studentDAO.findAll();
+
+		for(Student singleStudent:queryStudent){
+			System.out.println(singleStudent);
+		}
+	}
+
+	private void updateStudent(StudentDAO studentDAO){
+		Student st = studentDAO.findById(1);
+		System.out.println("student = "+st);
+		st.setlastName("new");
+		studentDAO.update(st);
+		System.out.println("updated student = "+st);
+	}
+
+	private void deleteStudent(StudentDAO theStudent){
+		int studentId = 4;
+		System.out.println("delete student id : "+studentId);
+		theStudent.delete(studentId);
 	}
 }

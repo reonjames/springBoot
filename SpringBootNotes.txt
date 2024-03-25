@@ -212,5 +212,47 @@ When to use entity manager and JPA repository?
 Alter table student_tracker.student AUTO_INCREMENT = <ANY INTEGER value>		//this sql script will update auto increment of primary key to given value
 Truncate student_tracker.student				//this sql script will update auto increment of primary key to 1 and remove all data from db
 
+JPA : Query language for retrieving object.
 Retrieving a Java object with JPA (read operation of CRUD)
 e.g: Student myStudent= entityManager.find(Student.class,1);			//entity class is Student and primary key is 1, if not found it return null
+
+TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student where lastName=:theData",Student.class);			//here From Student is a JPA Entity that is class name and ":theData" is JPQL named parameter. Act as a placeholder to be filled in later.
+	List<Student> students=theQuery.getResultList();		//getResultList() return a list of Student objects from the database
+CRUD operation mapping to entity manager:
+	Create-> entityManager.persist()
+	update-> entityManager.merge()
+	read ->  entityManager.find , entityManager.createQuery for object
+	delete -> entityManager.remove					//if u wish to delete all student then in createQuery write DELETE FROM STUDENT
+If u want to create table from java code then:
+	in application.properties file: spring.jpa.hibernate.ddl-auto = create			// jpa/hibernate will drop tables and then create them
+different property value can be given like none,create-only,drop,create-drop,validate,update
+REST over HTTP
+	HTTP method	CRUD operation
+	POST		Create a new entity
+	GET		Read a list of entities or single entity
+	PUT		Update an existing entity
+	Delete		Delete an existing entity
+@RestController			//add REST support
+@RequestMapping("/test")	//declare before class name
+@GetMapping("/hello")		//access the REST endpoint at /test/hello
+
+For simple REST testing for GET requests, web browser and Postman are similar.
+
+Data binding is the process of converting JSON data to a java POJO(plain old java object) or vice versa.
+Jackson handles data binding between JSON and Java POJO.
+Spring will handle Jackson integration.JSON data being passed to REST controller is converted to POJO.
+Java object being returned from REST controller is converted to JSON.
+
+@PathVariable		//bind the path variable
+	e.g. @GetMapping("/student/{studentId}")
+	     public Student getStudent(@PathVariable int studentId){
+		List<Student>.......
+		return ob.get(index);		//jackson convert object to JSON
+		}
+@PostContsruct		//will be called only once when bean is construct.To load data not many times like initialising object with values when @GetMapping endpoint is called, so will create new method with this annotation to load once
+@ExceptionHandler	//will return a ResponseEntity. ResponseEntity is a wrapper for the HTTP response object
+@ControllerAdvice is similar to an interceptor / filter.		//applies at class level
+	Pre-process requests to controller.
+	Post-process responses to handle exceptions
+	perfect for global exception handling.
+	real time use of AOP(aspect oriented program)
