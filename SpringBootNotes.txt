@@ -55,7 +55,7 @@ WhaT is Spring Boot Starter
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-web</artifactId>			//It contains collections of maven dependency (i.e. contains spring-web,spring-webmvc,hibernate-validator,json,tomcat etc)
 	</dependency>
-Spring MVC is a library that simplifies the handling http request and response.
+Spring MVC(model-view-controller) is a library that simplifies the handling http request and response.
 Spring MVC use dispatcher Servlet that act as a front controller for spring based web application.Any request is going to come into our website the front controller is going to stand in front and is going to accept all the requests and once the front controller accepts that request then this is the job of the front controller that it will make a decision that who is the right controller to handle that request.
 Spring Dev Tool: restart our app automatically.
 Spring boot Actuator: expose endpoints to monitor and manage your application. Just add dependency to POM file
@@ -89,13 +89,14 @@ Primary function of spring container:
 	1.create and manage objects (Inversion of Control)
 	2.Inject object's dependencies (Dependency Injection)
 Injection type:
-	1.Construction Injection
+	1.Construction Injection: Constructor injection is the most preferred type of injection in Spring. In constructor injection, the dependencies are passed to the class constructor. This ensures that the dependencies are initialized before the class is used.
 		Use this when u have required dependencies
 		Recommended by spring.io development team
-	2.Setter Injection
+	2.Setter Injection: Setter injection is another type of injection in Spring. In setter injection, the dependencies are set using setter methods. This is less preferred than constructor injection because it can lead to null pointer exceptions if the dependencies are not set.
 		Use this when u have optional dependencies
 		if dependency is not provided, ur app can provide reasonable default logic
-Spring AutoWiring
+	3.Field injection: Field injection is the least preferred type of injection in Spring. In field injection, the dependencies are set directly to the fields of the class. This is not recommended because it can lead to tight coupling between the class and its dependencies.
+Spring AutoWiring: Autowiring is a feature of Spring that allows the framework to automatically inject dependencies into a Spring bean. Autowiring can be achieved using the @Autowired annotation.
 	For dependency injection, Spring can use autowiring
 	Spring will look for a class that matches, matches by type:class or interface
 	Spring will inject it automatically...hence it is autowired.
@@ -159,7 +160,7 @@ Hibernate:
 	It provide Object to relational mapping(ORM)
 ORM: developer defines mapping between java class and database table.
 
-JPA: Jakarta Persistence API (JPA):
+JPA: Java Persistence API (JPA):
 	standard API for Object to Relational Mapping(ORM)
 	Only a Specification
 		define a set of interfaces
@@ -204,7 +205,7 @@ DAO make use of JPA's entity manager and entity manager make use of Data source.
 When to use entity manager and JPA repository?
 	if u need low level control and flexibility use entity manager.
 	if u want high level of abstraction,use JPA repository
-@Transactional
+@Transactional.....????
 	automatically begin and end a transaction for your JPA code			//used mostly when we are doing create or update
 @Repository
 	sub annotation of @Component. Provide support for component scanning and translate JDBC exceptions.
@@ -268,4 +269,31 @@ Spring Data JPA provides the interface: JpaRepository. Using spring data JPA dif
 
 Spring Data REST : using existing JpaRepository , it gives REST CRUD implementation for free.
 	add spring-boot-starter-data-rest dependency to POM file
+	by default Spring Data REST will create endpoints based on entity type. First character of entity type is lowercase and add "s" to the entity.
+		e.g. public interface EmployeeRepository extends JpaRepository<Employee,Integer>{ }   	// here entity type is Employee so we have /employees
+	Alternatively we can manually give endpoint name using @RepositoryRestResource(path = "<endpointName>")
+		e.g. @RepositoryRestResource(path = "<endpointName>")
+		     public interface EmployeeRepository extends JpaRepository<Employee,Integer>{ }
 HATEOAS: spring data REST endpoints are HATEOAS compliant. Act as meta-data for REST data.
+
+*************************************	
+Spring Boot REST API Security
+*************************************
+
+spring security api pre process/post process web request before going to endpoint
+Main purpose of security is to check authenticate and authorization
+Define application security constraints in configuration
+	@Configuration
+Enable spring security:
+	add spring-boot-starter-security dependency in pom.xml
+	by adding this dependency it will automatically secure all endpoints for application
+in spring boot passwords are stored using a specific format
+	{id}encodedPassword
+		here id can have noop( no operation that is plain text passwords) and bcrypt (Bcrypt password hashing) ...... values.
+Restrict access to certain roles:
+	requestMatchers(<HttpMethod>,<endPoints>).hasRole("<singleRole>")
+		example: requestMatchers(HttpMethod.POST,"/api/employees").hasRole("MANAGER")
+Spring Security can protect against CSRF security.
+
+spring jdbc provide two table: users and authorities
+jdbcUserDetailManager tellspring security to use JDBC authentication with our data source that is it will read and write authenticators from db(users,role and password)
