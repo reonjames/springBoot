@@ -280,8 +280,10 @@ HATEOAS: spring data REST endpoints are HATEOAS compliant. Act as meta-data for 
 Spring Boot REST API Security
 *************************************
 
-spring security api pre process/post process web request before going to endpoint
-Main purpose of security is to check authenticate and authorization
+spring security implements using servlet filters in background.
+	servlet filters are used to pre process/post process web request before going to endpoint
+	servlet filter route the web request based on security logic
+Main purpose of security is to check authentication and authorization
 Define application security constraints in configuration
 	@Configuration
 Enable spring security:
@@ -293,7 +295,7 @@ in spring boot passwords are stored using a specific format
 Restrict access to certain roles:
 	requestMatchers(<HttpMethod>,<endPoints>).hasRole("<singleRole>")
 		example: requestMatchers(HttpMethod.POST,"/api/employees").hasRole("MANAGER")
-Spring Security can protect against CSRF security.
+Spring Security can protect against CSRF (cross site request forgery) security.
 
 spring jdbc provide two table: users and authorities
 jdbcUserDetailManager tellspring security to use JDBC authentication with our data source that is it will read and write authenticators from db(users,role and password)
