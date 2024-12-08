@@ -4,8 +4,40 @@ why Spring
 
 Inversion of control:
 	In software engineering, inversion of control (IoC) is a design pattern in which custom-written portions of a computer program receive the flow of control from a generic framework.
+
+What is IoC?
+
+IoC is a design principle where the control of object creation and lifecycle management is transferred from the application code to an external entity or framework (like Spring). This contrasts with traditional programming, where objects create and manage their dependencies directly.
+
+IoC in Spring
+
+Spring is an IoC container, meaning it manages objects (beans) and their dependencies.
+Key Steps:
+
+    Define Beans: Mark classes as beans using annotations like @Component, @Service, or @Repository.
+    Wire Dependencies: Use annotations like @Autowired or XML configuration to specify dependencies.
+    Let Spring Manage: Spring takes care of creating and injecting the objects when needed.
+
+IoC Flow
+
+    You register beans in Spring using annotations or configurations.
+    Spring creates a "container" (called the ApplicationContext) that knows how to create and manage these beans.
+    Whenever your application needs a bean, Spring provides it, injecting dependencies as required.
+
 Dependency injector:
 	In software engineering, dependency injection is a programming technique in which an object or function receives other objects or functions that it requires, as opposed to creating them internally. Dependency injection aims to separate the concerns of constructing objects and using them, leading to loosely coupled programs
+
+What is Dependency Injection?
+
+DI is a design pattern used to provide an object (called the dependent) with the dependencies it needs, rather than letting the object create them itself. This makes the dependent class more flexible and easier to test because it does not control how its dependencies are created.
+Key Concepts
+
+    1.Dependency: An object that another object requires to function. For example, if Car needs Engine, then Engine is a dependency of Car.
+
+    2.Injection: The act of passing dependencies into an object rather than having the object create or find them itself.
+
+    3.Decoupling: By injecting dependencies, the dependent class does not directly depend on the specific implementation of the dependency, making the code easier to maintain and extend.
+
 Spring Boot transforms how you approach Java programming tasks, radically streamlining your experience. Spring Boot combines necessities such as an application context and an auto-configured, embedded web server to make microservice development a cinch.
 
 Spring Initializr is a web-based tool using which we can easily generate the structure of the Spring Boot project. It also provides various different features for the projects expressed in a metadata model. This model allows us to configure the list of dependencies that are supported by JVM.
