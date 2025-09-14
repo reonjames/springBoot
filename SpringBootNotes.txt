@@ -114,6 +114,9 @@ To read value from application.properties:
 	@Value("${coach.name}")
 	private String coachName;
 
+To set context path in application.properties i.e all requests should be prefixed with /mycoolapp
+server.servlet.context-path=/mycoolapp
+
 SECTION-2 SPRING CORE
 
 Inversion of Control: approach of outsourcing the construction and management of objects.
@@ -132,6 +135,7 @@ Spring AutoWiring: Autowiring is a feature of Spring that allows the framework t
 	For dependency injection, Spring can use autowiring
 	Spring will look for a class that matches, matches by type:class or interface
 	Spring will inject it automatically...hence it is autowired.
+	if you only have one constructor then @Autowired on constructor is optional.
 
 @Component annotation
 	@Component marks the class as spring bean.
