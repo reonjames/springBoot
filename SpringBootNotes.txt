@@ -142,7 +142,8 @@ Spring AutoWiring: Autowiring is a feature of Spring that allows the framework t
 	A spring bean is just a regular java class that is managed by Spring.
 	@Component also makes the bean available for dependency injection
 @Autowired annotation tells Spring to inject a dependency, if u have one constructor then @Autowired on constructor is optional.
-@SpringBootApplication contains @AutoScanConfiguration, @Configuration, @__
+@SpringBootApplication contains @AutoScanConfiguration, @Configuration, @ComponentScan
+	SpringApplication.run(main class name, args);	//bootstrap the main application.
 	This will scan from packages and its sub packages
 	If package is outside main package then list it in @SpringBootApplication(scanBasePackages={"com.luv2code.utils",....})
 Field injection is no longer in use			//use of @Autowired before field
